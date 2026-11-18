@@ -1,0 +1,386 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>iiNSTEADYCLUB — Stay Steady, Play iiNSTEADY (mockup)</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/logo-mark.svg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0914;--bg2:#11101f;--lamp:#ffb85c;--lamp2:#ffd89a;--v:#6C3BFF;--chalk:#f1e9d8;--m:#a9a6b8;--line:rgba(241,233,216,.16);--u:Unbounded,Pretendard,sans-serif;--h:100vh}
+@supports(height:100svh){:root{--h:100svh}}
+html{overflow-x:clip;background:var(--bg)}html.lenis{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{font-family:Pretendard,-apple-system,sans-serif;color:var(--chalk);background:var(--bg);-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-x:clip}
+a{color:inherit;text-decoration:none}img{display:block}
+.mono{font-family:var(--u);letter-spacing:.18em;text-transform:uppercase;font-weight:500}
+/* loader */
+#ld{position:fixed;inset:0;z-index:200;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px}
+#ld .lg{width:min(300px,64vw);clip-path:inset(0 100% 0 0)}
+#ld .bar{width:180px;height:1px;background:rgba(255,255,255,.12);position:relative;overflow:hidden}#ld .bar i{position:absolute;inset:0;background:var(--lamp);transform:scaleX(0);transform-origin:left}
+#ld .pc{font-size:10px;color:var(--m)}
+.reduce #ld,.noload #ld{display:none}
+/* chrome */
+#prog{position:fixed;left:0;top:0;height:2px;width:100%;background:linear-gradient(90deg,var(--lamp),var(--v));transform:scaleX(0);transform-origin:left;z-index:120}
+nav{position:fixed;left:0;right:0;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,56px);transition:background .4s,height .4s,transform .7s cubic-bezier(.2,.7,.2,1),opacity .7s;opacity:0;transform:translateY(-100%)}
+nav.in{opacity:1;transform:none}nav.in.hide{transform:translateY(-100%)}
+nav.solid{background:rgba(10,9,20,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);height:60px;box-shadow:0 1px 0 var(--line)}
+nav img{height:20px}nav ul{display:flex;gap:34px;list-style:none;font-size:11px}
+nav li a{position:relative;opacity:.8;transition:opacity .3s}nav li a:hover{opacity:1;color:var(--lamp)}
+#scn{position:fixed;right:clamp(16px,3vw,40px);bottom:clamp(18px,4vh,36px);z-index:90;display:flex;align-items:center;gap:12px;font-size:10px;color:var(--chalk);opacity:.75;pointer-events:none}
+#scn .ln{width:56px;height:1px;background:rgba(255,255,255,.2);position:relative}#scn .ln i{position:absolute;inset:0;background:var(--lamp);transform-origin:left;transform:scaleX(0)}
+.btn{display:inline-flex;align-items:center;gap:12px;border:1px solid var(--chalk);padding:16px 28px;font-family:var(--u);font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;position:relative;overflow:hidden;isolation:isolate;transition:color .35s;white-space:nowrap}
+.btn:before{content:"";position:absolute;inset:0;background:var(--lamp);transform:translateY(101%);transition:transform .45s cubic-bezier(.7,0,.2,1);z-index:-1}
+.btn:hover{color:#1a1208;border-color:var(--lamp)}.btn:hover:before{transform:none}
+.btn.lp{background:var(--lamp);color:#1a1208;border-color:var(--lamp)}.btn.lp:before{background:#fff}
+.btns{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}.btn.nl{text-transform:none;letter-spacing:.04em;font-family:Pretendard;font-size:14px;font-weight:700}
+.eb{font-size:11px;color:var(--lamp);margin-bottom:16px;display:flex;align-items:center;gap:12px}.eb:before{content:"";width:28px;height:1px;background:currentColor}
+.H{font-family:var(--u);font-weight:800;text-transform:uppercase;font-size:clamp(34px,6vw,100px);line-height:1;letter-spacing:-.02em}
+.H.s{font-size:clamp(22px,3.1vw,54px)}
+.H .w{display:inline-block;white-space:nowrap}.H .c{display:inline-block}
+.K{font-size:clamp(17px,1.8vw,27px);font-weight:700;letter-spacing:-.03em;margin-top:16px;line-height:1.35}
+.P{font-size:clamp(14px,1.05vw,16px);color:var(--m);line-height:1.7;margin-top:12px;max-width:480px}
+.inv{display:inline-block;font-size:10px;font-weight:700;color:#ffb85c;border:1px solid rgba(255,184,92,.4);padding:3px 8px;letter-spacing:.06em;margin-top:12px}
+.stage{position:relative;height:var(--h);min-height:560px;overflow:hidden;background:var(--bg)}
+.bp{position:absolute;inset:0;background-image:linear-gradient(rgba(108,59,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(108,59,255,.07) 1px,transparent 1px);background-size:120px 120px;-webkit-mask-image:radial-gradient(ellipse at 60% 50%,#000 10%,transparent 75%);mask-image:radial-gradient(ellipse at 60% 50%,#000 10%,transparent 75%)}
+.crop{position:absolute;width:18px;height:18px;border:0 solid var(--chalk);opacity:.35;z-index:4}
+.crop.a{left:clamp(16px,2.5vw,36px);top:84px;border-width:1px 0 0 1px}.crop.b{right:clamp(16px,2.5vw,36px);top:84px;border-width:1px 1px 0 0}
+.crop.c{left:clamp(16px,2.5vw,36px);bottom:clamp(16px,3vh,32px);border-width:0 0 1px 1px}.crop.d{right:clamp(16px,2.5vw,36px);bottom:clamp(16px,3vh,32px);border-width:0 1px 1px 0}
+.cap{position:absolute;left:clamp(20px,6vw,96px);z-index:8}
+/* HERO */
+.cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#hero .t{display:none}
+@media(max-aspect-ratio:1/1){#hero .t{display:block}#hero .w{display:none}}
+#hph{position:absolute;inset:0;clip-path:circle(0px at 76% 14%);will-change:clip-path,transform}
+#hvig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,transparent 30%,rgba(10,9,20,.75) 100%),linear-gradient(0deg,rgba(10,9,20,.85) 0%,transparent 42%);opacity:0}
+#hglow{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;opacity:0}
+.hsk{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.hsk path{fill:none;stroke:var(--chalk);stroke-width:var(--sw,1.6);stroke-dasharray:1 2;stroke-dashoffset:1;stroke-linejoin:round;opacity:.9}
+.hsk.t,.hsk-w{display:none}
+#hero .skimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
+#hero .layer{position:absolute;inset:0;will-change:transform}
+.HH{position:absolute;z-index:8;left:clamp(20px,5vw,84px);bottom:clamp(60px,10vh,120px);font-family:var(--u);font-weight:800;font-size:clamp(26px,4.5vw,82px);line-height:1.04;letter-spacing:-.025em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1px rgba(241,233,216,.6);background:linear-gradient(90deg,#fff6e6 var(--fill,0%),transparent var(--fill,0%));-webkit-background-clip:text;background-clip:text}
+.HH .nm{text-transform:none}
+.HH em{font-style:normal;background:linear-gradient(90deg,var(--lamp2) var(--fill,0%),transparent var(--fill,0%));-webkit-background-clip:text;background-clip:text}
+.hsub{position:absolute;z-index:8;left:clamp(20px,5vw,84px);bottom:clamp(28px,5vh,56px);font-size:clamp(13px,1.1vw,17px);color:var(--m);opacity:0}
+.hchips{position:absolute;left:clamp(20px,5vw,84px);top:clamp(84px,13vh,120px);z-index:8;display:flex;gap:6px;font-size:10px}
+.hchips span{padding:6px 12px;border:1px solid var(--line);color:var(--m);transition:all .3s;white-space:nowrap}.hchips span.on{background:var(--lamp);border-color:var(--lamp);color:#1a1208}
+.hcue{position:absolute;z-index:8;right:clamp(20px,5vw,84px);top:50%;writing-mode:vertical-rl;font-size:10px;color:var(--m);display:flex;align-items:center;gap:10px}
+/* ROAD */
+#stars{position:absolute;left:0;top:0;height:60%;will-change:transform}
+#sky{position:absolute;left:0;right:0;bottom:22vh;height:34vh;will-change:transform}
+#roadbed{position:absolute;left:0;right:0;bottom:0;height:24vh;background:linear-gradient(180deg,#14122a,#0a0914);border-top:1px solid var(--line)}
+#roadbed .dash{position:absolute;left:0;right:0;top:46%;height:3px;background:repeating-linear-gradient(90deg,rgba(241,233,216,.28) 0 56px,transparent 56px 130px)}
+#track{position:absolute;inset:0;will-change:transform}
+.seg{position:absolute;top:0;height:100%;width:0}
+.lamp{position:absolute;left:0;top:8vh;height:68vh;aspect-ratio:160/520;transform:translateX(-50%)}
+.lamp svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.lamp .st{fill:none;stroke:var(--chalk);stroke-width:2;stroke-dasharray:1 2;stroke-dashoffset:1;stroke-linejoin:round;stroke-linecap:round}
+.lamp .lf{opacity:0}
+.bulb{position:absolute;left:50%;top:calc(8vh + 68vh*70/520);width:50vh;height:50vh;margin:-25vh 0 0 -25vh;border-radius:50%;background:radial-gradient(circle,rgba(255,200,120,.5),rgba(255,160,70,.14) 38%,transparent 66%);opacity:0;mix-blend-mode:screen;pointer-events:none}
+.cone{position:absolute;left:0;top:calc(8vh + 68vh*95/520);width:60vh;height:calc(76vh - 8vh - 68vh*95/520);transform:translateX(-50%);background:linear-gradient(180deg,rgba(255,196,110,.34),rgba(255,170,80,.03));clip-path:polygon(44% 0,56% 0,100% 100%,0 100%);opacity:0;pointer-events:none}
+.pool{position:absolute;left:0;bottom:calc(-24vh + 24vh*.16);width:44vh;height:9vh;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse,rgba(255,190,100,.5),transparent 68%);opacity:0}
+.arch{position:absolute;left:0;top:28vh;width:31vh;height:48vh;transform:translateX(-50%);border-radius:999px 999px 8px 8px;overflow:hidden;border:1px solid rgba(241,233,216,.0);background:#0e0d1b;box-shadow:0 0 0 1px rgba(241,233,216,.12)}
+.arch img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--op,50%) 30%}
+.arch .sk{opacity:0}.arch .ph{clip-path:inset(100% 0 0 0);filter:saturate(1.05) contrast(1.04)}
+.arch .wl{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--lamp),transparent);box-shadow:0 0 14px 3px rgba(255,184,92,.55);opacity:0;top:100%}
+.info{position:absolute;left:calc(15.5vh + 3vw);top:32vh;width:min(26vw,420px);opacity:0}
+.info .no{font-size:10px;color:var(--lamp)}
+.info h3{font-family:var(--u);font-weight:800;font-size:clamp(26px,3.6vw,60px);line-height:1.02;letter-spacing:-.02em;margin:8px 0 10px}
+.info .rl{font-size:11px;color:var(--m)}
+.info a.hd{display:inline-block;margin-top:10px;font-size:13px;color:var(--lamp2);border-bottom:1px solid rgba(255,216,154,.35)}
+.info q{display:block;quotes:none;margin-top:16px;font-size:clamp(14px,1.15vw,17px);line-height:1.65;color:var(--chalk);opacity:.9;border-left:2px solid var(--lamp);padding-left:14px}
+#rdots{position:absolute;z-index:8;left:50%;bottom:clamp(20px,5vh,44px);transform:translateX(-50%);display:flex;gap:18px;font-size:10px;color:var(--m)}
+#rdots span{display:flex;align-items:center;gap:8px;transition:color .3s;white-space:nowrap}#rdots i{width:8px;height:8px;border-radius:50%;border:1px solid var(--m);transition:all .3s}
+#rdots span.on{color:var(--lamp2)}#rdots span.on i{background:var(--lamp);border-color:var(--lamp);box-shadow:0 0 10px var(--lamp)}
+/* MUSIC */
+#deck{position:absolute;left:6vw;top:calc(50% + 10px);width:var(--S);height:var(--S);transform:translateY(-50%);perspective:1400px;z-index:4}
+#music{--S:min(46vh,34vw)}
+#vinyl{position:absolute;left:0;top:2%;width:96%;height:96%;border-radius:50%;background:repeating-radial-gradient(circle at 50% 50%,#17161f 0 2px,#262531 2px 3px);box-shadow:0 0 0 1px rgba(255,255,255,.16),0 0 90px rgba(255,184,92,.14),0 20px 60px rgba(0,0,0,.6);will-change:transform}
+#vsheen{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 20deg,rgba(255,255,255,0) 0 8%,rgba(255,255,255,.34) 13%,rgba(255,255,255,0) 20% 56%,rgba(255,255,255,.22) 62%,rgba(255,255,255,0) 70%);pointer-events:none}
+#vlab{position:absolute;left:33%;top:33%;width:34%;height:34%;border-radius:50%;background-size:cover;background-position:center;box-shadow:0 0 0 3px #0a0a0f,inset 0 0 12px rgba(0,0,0,.4);overflow:hidden}
+#vlab:after{content:"";position:absolute;left:46%;top:46%;width:8%;height:8%;border-radius:50%;background:var(--bg)}
+#vlab.q{background:linear-gradient(135deg,var(--v),#2a1d5c);display:flex;align-items:center;justify-content:center;font-family:var(--u);font-weight:800;color:#fff;font-size:calc(var(--S)*.1)}
+#slv{position:absolute;inset:0;transform-style:preserve-3d;transform-origin:50% 50%;will-change:transform;box-shadow:0 24px 60px rgba(0,0,0,.65);background:#111}
+#slv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#slv .new{position:absolute;inset:0;display:none;flex-direction:column;justify-content:space-between;padding:8%;background:radial-gradient(circle at 30% 20%,#8a5cff,#2a1d5c 60%,#120c2a);color:#fff}
+#slv .new b{font-family:var(--u);font-weight:800;font-size:calc(var(--S)*.5);line-height:.9}#slv .new span{font-family:var(--u);font-weight:700;font-size:calc(var(--S)*.06);letter-spacing:.1em;line-height:1.3}
+#slv.isnew .new{display:flex}#slv.isnew img{display:none}
+#minfo{position:absolute;z-index:6;left:calc(6vw + var(--S) + min(9vw,150px));top:50%;transform:translateY(-46%);width:calc(100vw - (6vw + var(--S) + min(9vw,150px)) - 5vw)}
+#yr{font-family:var(--u);font-weight:800;font-size:clamp(70px,11vw,190px);line-height:.95;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px rgba(255,216,154,.75);overflow:hidden;height:1.02em}
+#yr span{display:block;will-change:transform}
+#mt{font-size:clamp(26px,3.3vw,56px);font-weight:800;letter-spacing:-.03em;margin-top:10px;line-height:1.1}
+#mtype{font-size:11px;color:var(--lamp);margin-top:18px}
+#ma{font-size:clamp(15px,1.3vw,20px);margin-top:8px;font-weight:600}#mc{font-size:13px;color:var(--m);margin-top:6px;line-height:1.6}
+#mnew{display:none}
+#ticks{position:absolute;z-index:8;left:6vw;right:6vw;bottom:clamp(36px,8vh,76px);display:flex;justify-content:space-between;align-items:flex-end;gap:2px}
+#ticks span{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:9px;color:rgba(241,233,216,.35);transition:color .3s}
+#ticks span i{display:block;width:1px;height:14px;background:currentColor;transition:height .3s,background .3s}#ticks span.on{color:var(--lamp2)}#ticks span.on i{height:34px;background:var(--lamp)}
+#ticks span.nw i{background:var(--v)}#ticks span.nw{color:#a98cff}
+#mglow{position:absolute;left:0;top:30%;width:60vw;height:70vh;background:radial-gradient(ellipse at 30% 40%,rgba(255,184,92,.14),transparent 60%);pointer-events:none}
+/* AUDITION */
+#astage{position:absolute;left:50%;top:calc(50% + 40px);transform:translate(-50%,-50%);width:min(100vw,1560px);aspect-ratio:1200/560;z-index:3}
+#astage svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+#arole{position:absolute;z-index:7;left:clamp(20px,6vw,96px);top:clamp(88px,15vh,150px)}
+#arole .big{font-size:clamp(46px,8vw,140px);font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--lamp2);height:1.08em;overflow:hidden}
+#arole .big span{display:block}
+#arole .ln{font-size:clamp(16px,1.6vw,24px);font-weight:700;letter-spacing:-.03em;margin-top:6px;line-height:1.35;min-height:2.7em}
+.rchips{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;font-size:11px}
+.rchips span{padding:7px 14px;border:1px solid var(--line);color:var(--m);transition:all .3s;font-family:Pretendard;font-weight:600}.rchips span.on{background:var(--lamp);color:#1a1208;border-color:var(--lamp)}.rchips span.dn{color:var(--lamp2);border-color:rgba(255,184,92,.4)}
+#anext{position:absolute;z-index:9;left:50%;bottom:clamp(40px,9vh,90px);transform:translateX(-50%);text-align:center;opacity:0;pointer-events:none;width:min(92vw,900px)}
+#anext.on{pointer-events:auto}
+#anext h2{font-family:Pretendard;font-weight:800;font-size:clamp(46px,9vw,150px);letter-spacing:-.05em;line-height:1;color:#fff;text-shadow:0 0 50px rgba(255,184,92,.45)}
+#anext p{font-size:13px;color:var(--m);margin-top:10px}
+.sil{fill:#06050c;stroke:rgba(108,59,255,.55);stroke-width:1.4}
+.sil.dim{opacity:.0}.sil.rl{fill:#1a1430;stroke:#ffb85c;stroke-width:2}
+.spotc{opacity:0}
+/* CTA */
+.cta{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(90px,14vh,160px) clamp(20px,6vw,96px) 60px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 80% 0%,rgba(255,184,92,.14),transparent 55%),var(--bg)}
+.cta>*{position:relative}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:44px;max-width:900px}
+.card{border:1px solid var(--line);padding:26px;display:flex;flex-direction:column;gap:6px;transition:border-color .3s,transform .4s,background .3s;background:rgba(255,255,255,.02)}
+.card:hover{border-color:var(--lamp);transform:translateY(-4px);background:rgba(255,184,92,.05)}
+.card small{font-size:10px;color:var(--lamp)}.card b{font-family:var(--u);font-weight:800;font-size:clamp(20px,2vw,30px);letter-spacing:-.02em}.card span{font-size:14px;color:var(--m)}
+.card em{font-style:normal;margin-top:14px;font-size:11px;font-family:var(--u);letter-spacing:.14em}
+footer{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:26px clamp(20px,6vw,96px);border-top:1px solid var(--line);font-size:12px;color:var(--m);line-height:1.6}
+footer img{height:18px}
+@media(max-width:820px){
+ nav ul{display:none}nav{height:60px}
+ .H{font-size:clamp(30px,9vw,54px)}.H.s{font-size:clamp(22px,7vw,40px)}
+ .K{font-size:17px}.P{display:none}
+ .HH{font-size:clamp(24px,7.4vw,46px);bottom:clamp(54px,9vh,90px)}
+ .hchips{top:76px}.hcue{display:none}
+ #scn{display:none}
+ .lamp{top:11vh;height:52vh}.bulb{top:calc(11vh + 52vh*70/520);width:40vh;height:40vh;margin:-20vh 0 0 -20vh}
+ .cone{top:calc(11vh + 52vh*95/520);width:44vh;height:calc(64vh - 11vh - 52vh*95/520)}
+ .arch{top:24vh;width:22vh;height:32vh}
+ .info{left:0;transform:translateX(-50%);top:65.5vh;width:84vw;text-align:center}.info q{border:0;padding:0;margin-top:10px;font-size:13px}.info h3{font-size:clamp(24px,8vw,38px);margin:4px 0 6px}
+ #roadbed{height:36vh}#sky{bottom:34vh;height:26vh}.pool{bottom:calc(-24vh + 24vh*.16 + 12vh)}
+ #rdots{gap:10px;font-size:0}#rdots span{font-size:0}
+ #rdots i{width:7px;height:7px}
+ .rdcap{display:none}
+ #music{--S:min(46vw,28vh)}
+ #deck{left:20px;top:calc(50% - 14vh);transform:translateY(-50%)}
+ #minfo{left:20px;right:20px;width:auto;top:calc(50% + 7vh);transform:none}
+ #yr{font-size:clamp(54px,18vw,96px)}#mt{font-size:clamp(22px,7vw,34px);margin-top:4px}#mtype{margin-top:10px}#mc{display:none}
+ #ticks span{font-size:0}#ticks span.on{font-size:9px}
+ #ticks{left:14px;right:14px;bottom:44px}
+ #arole{top:78px}#arole .big{font-size:clamp(46px,17vw,86px)}#arole .ln{font-size:15px;min-height:2.7em}
+ #astage{top:calc(50% + 12vh);width:100vw;max-width:none;aspect-ratio:540/560}
+ footer{flex-direction:column;align-items:flex-start}
+ .cap{left:20px}
+}
+</style></head><body>
+<div id="ld"><img class="lg" src="assets/logo.svg" alt="iiNSTEADYCLUB"><div class="bar"><i></i></div><div class="pc mono">STAY STEADY <span id="pc">0</span>%</div></div>
+<div id="prog"></div>
+<svg width="0" height="0" style="position:absolute"><defs>
+ <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff2c4"/><stop offset=".5" stop-color="#ffc26b"/><stop offset="1" stop-color="#ff9c3d"/></linearGradient>
+ <linearGradient id="metal" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0d0c18"/><stop offset=".5" stop-color="#2a2745"/><stop offset="1" stop-color="#0d0c18"/></linearGradient>
+</defs></svg>
+<nav id="nav"><a href="#hero"><img src="assets/logo.svg" alt="iiNSTEADYCLUB"></a>
+ <ul class="mono"><li><a href="#hero">Stay steady</a></li><li><a href="#road">Artists</a></li><li><a href="#music">Music</a></li><li><a href="#aud">Audition</a></li><li><a href="#cta">Contact</a></li></ul>
+ <a class="btn" href="#aud" style="padding:10px 16px;font-size:10px">Audition</a></nav>
+<div id="scn" class="mono"><span id="scnn">SCENE 01 / 04</span><span class="ln"><i id="scnl"></i></span><span class="tc" id="scntc">00:00:00</span></div>
+
+<!-- SCENE 1 -->
+<section class="stage" id="hero">
+ <div class="bp"></div><i class="crop a"></i><i class="crop b"></i><i class="crop c"></i><i class="crop d"></i>
+ <div class="layer" id="hlayer">
+  <svg class="hsk w" id="hskw"></svg><svg class="hsk t" id="hskt"></svg>
+  <img class="skimg w cover" id="hsk1w" src="assets/sk-stage-wide.webp" alt=""><img class="skimg t cover" id="hsk1t" src="assets/sk-stage-tall.webp" alt="">
+  <div id="hph"><img class="w cover" src="assets/stage-wide.webp" alt="마이크와 가로등이 있는 밤 무대 (AI 생성 이미지)"><img class="t cover" src="assets/stage-tall.webp" alt=""></div>
+  <div id="hvig"></div><div id="hglow"></div>
+ </div>
+ <div class="hchips mono" id="hchips"><span class="on">01 Sketch</span><span>02 Lights on</span><span>03 Stage</span></div>
+ <h1 class="HH" id="hh">STAY STEADY,<br><em>PLAY <span class="nm">ii</span>NSTEADY</em>.</h1>
+ <p class="hsub" id="hsub">음악은 진하게, 거리는 가깝게 — iiNSTEADYCLUB ENTERTAINMENT</p>
+ <div class="hcue mono">Scroll <span>↓</span></div>
+</section>
+
+<!-- SCENE 2 -->
+<section class="stage" id="road">
+ <canvas id="stars"></canvas><svg id="sky"></svg>
+ <div id="roadbed"><i class="dash" id="dash"></i></div>
+ <div id="track"></div>
+ <div class="cap rdcap" style="top:clamp(84px,13vh,120px)"><p class="eb mono">Scene 02 · Artists</p><h2 class="H s">One light,<br><span style="color:var(--lamp2)">one artist.</span></h2><p class="K" style="font-size:clamp(14px,1.2vw,18px)">우리 클럽 멤버들</p></div>
+ <div id="rdots" class="mono"></div>
+</section>
+
+<!-- SCENE 3 -->
+<section class="stage" id="music">
+ <div class="bp"></div><div id="mglow"></div><i class="crop a"></i><i class="crop b"></i><i class="crop c"></i><i class="crop d"></i>
+ <div class="cap" style="top:clamp(84px,13vh,120px)"><p class="eb mono">Scene 03 · Music</p></div>
+ <div id="deck"><div id="vinyl"><div id="vsheen"></div><div id="vlab"></div></div>
+  <div id="slv"><img id="slimg" src="assets/cov/running.jpg" alt=""><div class="new"><span>iiNSTEADYCLUB<br>NEW ALBUM</span><b>?</b><span>COMING<br>SOON</span></div></div></div>
+ <div id="minfo"><div id="yr"><span>2012</span></div><div id="mt">Running</div><p id="mtype" class="mono">SINGLE · 싱글</p><p id="ma">L.Gordon</p><p id="mc"></p>
+  <div id="mnew" class="btns"><a class="btn lp nl" href="https://www.instagram.com/iinsteadyclub/" target="_blank" rel="noopener">소식 받기 @iinsteadyclub</a></div></div>
+ <div id="ticks" class="mono"></div>
+</section>
+
+<!-- SCENE 4 -->
+<section class="stage" id="aud">
+ <div class="bp"></div><i class="crop a"></i><i class="crop b"></i><i class="crop c"></i><i class="crop d"></i>
+ <div id="arole"><p class="eb mono">Scene 04 · Audition · 상시 모집</p><div class="big" id="abig"><span>작사</span></div><p class="ln" id="aln">당신의 문장이 누군가의 노래가 되도록.</p>
+  <div class="rchips" id="rchips"><span>01 작사</span><span>02 작곡</span><span>03 보컬</span><span>04 싱어송라이터</span></div>
+  <div class="btns" id="acta" style="opacity:0;pointer-events:none;margin-top:-34px"><a class="btn lp nl" id="mailto" href="mailto:iinsteadyclub@gmail.com?subject=%5B%EC%98%A4%EB%94%94%EC%85%98%20%EC%A7%80%EC%9B%90%5D%20%EC%A7%80%EC%9B%90%20%EB%B6%84%EC%95%BC%20%2F%20%EC%9D%B4%EB%A6%84">iinsteadyclub@gmail.com 로 지원하기 →</a></div></div>
+ <div id="astage"></div>
+ </section>
+
+<section class="cta" id="cta"><p class="eb mono">06 / Contact</p><h2 class="H split">Let's<br><span style="color:var(--lamp2)">hang out.</span></h2>
+ <p class="K">협업, 캐스팅, 그냥 인사도 환영. 답장은 사람이 직접 씁니다.</p>
+ <div class="btns"><a class="btn lp nl" href="mailto:iinsteadyclub@gmail.com">iinsteadyclub@gmail.com</a><a class="btn nl" href="https://www.instagram.com/iinsteadyclub/" target="_blank" rel="noopener">@iinsteadyclub</a></div>
+ <div class="cards">
+  <a class="card" href="https://iinsteadyclub.com/game/" target="_blank" rel="noopener"><small class="mono">Game · Beta · 연습 모드</small><b>iiNSTEADY RUN</b><span>3D 레이스 · 연습 모드</span><em>PLAY →</em></a>
+  <a class="card" href="https://iinsteadyclub.com/beat/" target="_blank" rel="noopener"><small class="mono">Game · Beta · 리듬게임</small><b>iiNSTEADY BEAT</b><span>리듬게임 · 7키 Extreme</span><em>PLAY →</em></a></div>
+</section>
+<footer><div><img src="assets/logo.svg" alt="iiNSTEADYCLUB"></div><div>© iiNSTEADYCLUB — 끝까지 스크롤해줘서 고마워요 ♥<br>비공식 디자인 목업 · 일부 이미지·카피는 시안용(AI 생성/가상)입니다. 공식 사이트: <a href="https://iinsteadyclub.com" style="color:var(--lamp2)">iinsteadyclub.com</a></div></footer>
+
+<script src="assets/js/gsap.min.js"></script><script src="assets/js/ScrollTrigger.min.js"></script><script src="assets/js/lenis.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,seg=(p,a,b)=>cl((p-a)/(b-a)),lerp=(a,b,t)=>a+(b-a)*t;
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,mobile=()=>innerWidth<=820,portrait=()=>matchMedia('(max-aspect-ratio:1/1)').matches;
+const NOLOAD=/noload/.test(location.hash);
+if(RM)document.documentElement.classList.add('reduce');if(NOLOAD)document.documentElement.classList.add('noload');
+gsap.registerPlugin(ScrollTrigger);
+let lenis=null;
+if(!RM&&!mobile()){lenis=new Lenis({lerp:.09,smoothWheel:true});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0)}
+$$('.split').forEach(h=>{const walk=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType==3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(w=>{if(!w)return;if(/^\s+$/.test(w)){f.append(' ');return}const ws=document.createElement('span');ws.className='w';[...w].forEach(ch=>{const s=document.createElement('span');s.className='c';s.textContent=ch;ws.append(s)});f.append(ws)});c.replaceWith(f)}else if(c.nodeType==1&&c.tagName!='BR')walk(c)})};walk(h)});
+function intro(){const tl=gsap.timeline();
+ if(!RM&&!NOLOAD){const o={v:0};tl.to('#ld .lg',{clipPath:'inset(0 0% 0 0)',duration:.8,ease:'power3.inOut'}).to('#ld .bar i',{scaleX:1,duration:.9,ease:'power2.inOut'},0).to(o,{v:100,duration:.9,ease:'power2.inOut',onUpdate:()=>$('#pc').textContent=Math.round(o.v)},0)
+  .to('#ld',{opacity:0,duration:.7,ease:'power2.inOut'},'+=.15').set('#ld',{display:'none'}).call(()=>$('#nav').classList.add('in'),null,'<.2')}else{$('#nav').classList.add('in')}}
+const PATHS={"stage-wide":{"w":1280,"h":720,"d":["M1277 632 L827 683 L766 688 L682 699 L615 703 L572 709 L561 707 L518 714 L485 715 L518 714 L561 707 L572 709 L615 703 L682 699 L766 688 L827 683 L1278 632","M672 213 L678 214 L680 218 L670 223 L672 268 L679 268 L681 275 L670 278 L666 274 L665 226 L659 229 L660 231 L662 226 L665 227 L664 241 L666 246 L664 247 L666 249 L666 264 L662 265 L662 262 L661 265 L667 266 L666 271 L664 272 L662 267 L663 274 L664 272 L667 273 L668 278 L679 278 L681 269 L675 269 L672 266 L688 263 L684 263 L684 261 L673 262 L672 260 L694 256 L694 258 L700 257 L695 255 L702 254 L702 260 L690 260 L695 261 L690 263 L703 263 L699 267 L704 266 L702 233 L700 232 L702 237 L699 239 L694 237 L699 235 L693 234 L691 236 L694 237 L691 238 L700 238 L702 241 L694 240 L693 242 L688 242 L693 242 L693 244 L688 244 L701 244 L703 247 L698 248 L703 250 L697 251 L694 249 L695 246 L694 248 L688 248 L693 248 L693 250 L688 250 L702 251 L703 253 L688 254 L695 255 L683 257 L682 255 L680 258 L673 259 L672 256 L680 255 L673 256 L672 253 L683 251 L682 247 L682 250 L673 253 L671 251 L678 249 L673 250 L672 247 L683 245 L674 247 L671 245 L682 242 L672 244 L672 241 L683 239 L671 240 L678 237 L672 238 L672 235 L683 233 L674 235 L670 233 L680 231 L672 232 L671 229 L683 227 L681 225 L674 229 L670 227 L672 222 L680 220 L678 213 L673 213","M752 628 L746 633 L721 636 L659 632 L643 634 L631 631 L643 634 L659 632 L721 636 L746 633 L752 628 L754 632 L753 643 L748 647 L733 650 L680 653 L618 649 L542 657 L524 657 L513 659 L506 663 L497 662 L506 663 L510 660 L524 657 L542 657 L618 649 L680 653 L733 650 L753 644 L753 628","M926 559 L915 567 L918 566 L926 570 L953 572 L1029 571 L1035 568 L1037 573 L1021 576 L1018 579 L1015 577 L1013 579 L1006 577 L952 577 L916 573 L907 580 L917 573 L952 577 L1006 577 L1011 579 L1015 577 L1019 580 L1021 576 L1037 573 L1037 569 L1031 563 L1029 563 L1035 568 L1033 570 L1015 572 L953 572 L926 570 L918 566 L925 560 L958 563 L998 563 L958 563 L927 560","M678 312 L676 313 L681 319 L682 330 L674 333 L675 336 L681 337 L684 340 L683 345 L678 345 L669 338 L664 328 L665 318 L665 326 L663 330 L662 328 L661 333 L672 347 L682 349 L686 357 L686 364 L681 369 L685 372 L684 379 L687 385 L684 391 L685 491 L683 496 L683 546 L685 559 L683 546 L683 496 L685 491 L684 391 L687 385 L684 379 L685 371 L683 367 L686 365 L686 357 L683 348 L677 349 L673 347 L661 333 L664 329 L673 343 L681 346 L686 345 L683 344 L684 339 L676 336 L674 333 L679 331 L682 335 L680 333 L683 330 L687 331 L682 329 L681 319 L677 313","M675 614 L634 624 L629 628 L628 637 L617 641 L613 645 L466 655 L450 658 L436 656 L410 661 L396 660 L410 661 L436 656 L450 658 L466 655 L613 645 L620 640 L628 638 L629 629 L639 622 L676 614","M1000 191 L993 204 L993 214 L999 223 L991 233 L992 239 L997 242 L998 246 L990 259 L992 271 L990 276 L994 428 L998 437 L997 448 L998 436 L994 428 L990 277 L993 274 L990 259 L998 246 L991 233 L999 225 L998 219 L993 214 L993 204 L996 196 L1001 191","M930 42 L921 50 L908 56 L906 61 L933 161 L944 157 L946 150 L930 47 L946 154 L937 160 L933 160 L931 157 L906 61 L909 56 L925 48 L931 42 L935 42 L931 42","M900 598 L898 606 L886 616 L859 615 L854 618 L797 616 L854 618 L859 615 L886 616 L897 608 L900 599 L919 602 L982 605 L1039 603 L1055 599 L1039 603 L1000 605 L949 604 L901 599","M1012 42 L1033 56 L1012 154 L1010 158 L1006 158 L997 153 L1010 44 L997 154 L1006 158 L1011 158 L1033 56 L1013 43","M892 35 L890 36 L890 41 L896 56 L902 61 L929 164 L929 170 L924 178 L925 188 L933 193 L941 189 L949 199 L952 214 L955 217 L952 213 L949 199 L942 188 L933 193 L924 185 L929 164 L902 60 L896 55 L890 37 L893 35 L902 41 L903 46 L897 52 L902 49 L903 41 L893 35","M699 349 L696 353 L691 354 L692 368 L694 366 L691 365 L691 355 L693 353 L697 354 L693 358 L695 364 L694 359 L698 358 L702 384 L701 424 L694 470 L696 486 L693 489 L692 515 L695 521 L697 544 L695 521 L692 515 L692 495 L695 487 L696 490 L694 470 L702 412 L701 368 L697 353 L703 350 L700 350","M962 487 L955 533 L951 538 L947 538 L953 523 L956 503 L950 531 L947 534 L946 530 L943 529 L948 536 L946 539 L942 534 L941 537 L944 540 L934 549 L937 549 L940 555 L943 554 L948 539 L952 538 L953 543 L949 554 L944 558 L933 558 L932 556 L935 553 L932 555 L933 558 L948 557 L951 545 L953 543 L956 545 L958 541 L960 522 L963 517 L961 515 L962 512 L958 540 L955 545 L953 543 L960 492 L963 488","M893 615 L901 618 L943 624 L997 624 L1001 621 L1006 623 L1049 624 L1054 621 L1076 618 L1054 621 L1049 624 L1007 623 L1003 620 L997 624 L943 624 L894 616","M942 0 L945 8 L937 18 L929 12 L925 13 L923 19 L928 33 L1006 30 L1016 33 L1043 49 L1046 48 L1043 49 L1017 33 L1006 30 L931 34 L926 29 L924 16 L928 12 L937 19 L945 8 L942 1","M532 580 L494 584 L355 590 L531 581","M978 41 L944 42 L938 44 L953 153 L957 155 L987 154 L991 150 L1002 41 L979 41","M977 42 L1002 42 L991 150 L987 154 L957 155 L953 152 L938 44 L944 42 L976 42","M715 237 L718 239 L716 241 L708 241 L708 250 L716 249 L719 251 L717 253 L709 252 L709 266 L716 268 L719 272 L717 274 L700 272 L696 269 L697 266 L695 267 L700 273 L717 274 L718 282 L721 284 L717 278 L717 274 L720 273 L719 270 L709 265 L711 263 L718 267 L718 265 L712 264 L710 261 L721 263 L709 259 L710 255 L719 256 L716 255 L719 250 L708 247 L710 245 L720 246 L713 242 L718 239 L716 237","M910 581 L921 584 L963 586 L1033 586 L1037 584 L1033 586 L1014 584 L1010 586 L921 584 L911 581","M693 371 L691 374 L691 438 L691 374 L694 371 L697 373 L698 415 L697 421 L698 380 L697 372 L694 371","M688 208 L678 211 L688 208 L692 214 L690 218 L701 221 L700 224 L694 222 L687 224 L693 224 L693 226 L688 226 L700 226 L702 228 L700 230 L693 228 L690 230 L699 229 L702 231 L702 221 L693 219 L691 216 L693 214 L697 217 L698 214 L710 216 L706 211 L708 214 L704 215 L700 209 L703 213 L699 215 L696 209 L692 208 L698 213 L694 215 L689 209","M713 294 L712 298 L710 296 L717 302 L716 307 L701 307 L716 308 L717 306 L724 309 L722 312 L696 310 L693 306 L695 309 L690 311 L688 308 L690 299 L689 309 L687 311 L680 310 L709 311 L711 316 L713 311 L725 311 L724 308 L717 306 L717 301 L713 298 L713 295","M948 493 L946 495 L943 519 L935 543 L926 553 L927 556 L929 556 L927 553 L935 544 L944 516 L946 495 L948 493 L950 500 L947 516 L950 518 L946 528 L951 517 L948 516 L951 497 L949 494","M969 524 L970 536 L968 537 L965 531 L966 536 L970 537 L968 526 L971 525 L973 529 L982 535 L985 545 L993 555 L999 555 L1004 559 L1020 559 L1024 557 L1019 553 L1016 556 L1019 553 L1022 557 L1020 559 L1005 559 L999 555 L994 555 L987 548 L982 534 L970 525","M939 170 L939 178 L951 193 L956 207 L961 208 L962 204 L959 200 L954 181 L951 178 L943 177 L950 178 L954 182 L962 206 L959 208 L956 206 L951 192 L938 174 L940 170 L946 170 L951 176 L950 172 L940 170","M910 584 L911 592 L924 593 L932 598 L978 600 L981 597 L1004 598 L981 597 L975 600 L933 598 L926 593 L913 593 L910 590 L910 585","M959 211 L956 214 L959 212 L961 215 L981 216 L978 219 L959 218 L946 224 L947 227 L954 231 L956 235 L947 243 L955 236 L962 238 L958 237 L955 231 L947 226 L949 222 L957 219 L985 218 L981 218 L981 215 L963 215 L960 212","M1025 113 L1013 170 L1018 176 L1019 184 L1014 190 L1006 191 L1001 187 L1006 191 L1013 191 L1019 184 L1018 175 L1013 170 L1025 114","M999 452 L1005 457 L1002 459 L946 458 L1005 458 L1007 460 L1004 465 L1005 480 L1004 466 L1008 459 L1000 452","M743 613 L706 615 L797 613 L744 613","M1010 11 L1007 19 L1010 12 L1013 11 L1016 16 L1016 25 L1038 40 L1047 31 L1049 35 L1046 46 L1049 32 L1046 30 L1036 38 L1016 24 L1015 13 L1011 11","M1004 174 L996 177 L1004 176 L991 195 L987 207 L985 205 L985 197 L993 177 L991 178 L985 197 L986 207 L989 206 L991 196 L1005 178 L1005 175","M660 283 L678 301 L677 309 L674 307 L674 302 L670 297 L674 306 L672 307 L667 304 L666 295 L667 305 L675 309 L672 311 L664 307 L657 311 L654 309 L656 306 L661 305 L659 303 L659 284","M1056 596 L1060 600 L1060 607 L1063 613 L1064 611 L1080 615 L1084 619 L1111 620 L1084 619 L1083 615 L1086 617 L1063 612 L1060 607 L1059 597 L1057 597","M686 204 L671 209 L664 215 L659 224 L661 224 L661 220 L673 208 L686 204 L707 208 L717 220 L713 212 L707 208 L687 204","M664 276 L657 280 L659 281 L660 277 L664 280 L659 283 L660 304 L654 307 L656 312 L664 308 L670 312 L678 309 L678 300 L674 295 L680 295 L679 297 L679 294 L673 294 L668 288 L665 289 L663 287 L663 278 L665 277","M585 668 L599 668 L602 671 L626 672 L638 676 L647 674 L638 676 L626 672 L602 671 L599 668 L586 668","M682 572 L685 575 L684 598 L680 603 L681 617 L667 627 L681 617 L680 603 L684 599 L685 575 L683 572","M963 164 L957 166 L957 174 L966 204 L977 205 L980 203 L982 187 L989 169 L984 164 L964 164","M952 467 L949 469 L949 473 L952 476 L945 483 L947 485 L956 480 L962 481 L962 475 L959 474 L957 481 L955 478 L952 483 L947 484 L946 482 L950 478 L952 480 L952 474 L949 472 L952 467 L955 470 L956 476 L953 467","M962 165 L984 164 L989 169 L982 187 L980 202 L977 205 L968 205 L966 203 L957 174 L957 167 L961 165","M627 598 L658 598 L664 600 L658 602 L664 600 L678 601 L666 601 L658 598 L628 598","M717 315 L713 322 L718 316 L721 317 L718 337 L706 346 L696 347 L706 346 L718 338 L721 317 L718 316","M972 170 L967 178 L962 177 L969 179 L967 181 L969 182 L968 200 L968 178 L972 170 L975 177 L984 176 L976 177 L973 171","M708 221 L708 238 L713 237 L709 237 L707 235 L709 233 L713 234 L707 232 L714 231 L717 233 L712 230 L718 228 L712 228 L710 224 L711 226 L708 227 L707 223 L709 221 L715 221 L709 221","M682 677 L695 679 L722 677 L728 680 L734 677 L730 679 L723 677 L709 679 L683 677","M960 424 L961 426 L957 427 L954 434 L957 428 L961 426 L961 433 L989 433 L963 432 L960 425","M906 663 L901 666 L889 665 L899 665 L901 667 L898 669 L884 667 L898 669 L907 663 L923 663 L907 663","M995 518 L989 521 L997 519 L993 524 L996 527 L992 531 L996 527 L998 528 L997 535 L1001 545 L997 535 L998 527 L995 525 L998 519 L996 518","M702 617 L736 628 L746 628 L736 628 L703 617","M1083 482 L1074 488 L1074 493 L1079 497 L1085 497 L1090 492 L1089 488 L1088 494 L1084 497 L1079 497 L1075 493 L1075 487 L1083 482 L1089 486 L1084 483","M958 444 L946 456 L958 444 L967 447 L969 450 L979 451 L980 454 L981 450 L971 450 L959 444","M717 284 L707 293 L703 293 L697 300 L717 285 L720 289 L720 301 L720 288 L717 285","M982 479 L978 483 L974 480 L980 487 L978 492 L980 498 L978 483 L980 480 L984 480 L985 482 L981 485 L983 486 L986 481 L983 480","M694 601 L701 603 L701 612 L686 620 L683 618 L688 620 L701 613 L701 601 L695 601","M959 265 L961 267 L960 270 L955 272 L954 269 L958 267 L954 268 L955 275 L961 277 L958 281 L963 277 L955 274 L962 269 L960 266","M961 435 L954 436 L991 436 L970 437 L962 435","M979 537 L972 546 L972 550 L975 551 L972 548 L977 541 L989 555 L977 541 L978 538","M667 620 L655 625 L638 628 L672 620 L668 620","M957 557 L964 560 L985 560 L989 557 L982 560 L958 558","M956 240 L949 246 L949 249 L958 258 L960 263 L958 257 L950 249 L950 246 L957 240","M976 256 L980 258 L980 264 L976 266 L976 261 L974 269 L980 270 L982 267 L980 266 L980 258 L977 256","M520 673 L504 678 L493 678 L504 678 L521 673"]},"stage-tall":{"w":720,"h":1280,"d":["M323 814 L321 834 L317 837 L317 839 L319 836 L322 838 L319 841 L317 871 L317 879 L321 887 L322 1138 L320 1142 L323 1145 L322 1149 L324 1152 L322 1243 L258 1276 L255 1275 L259 1276 L319 1245 L322 1246 L322 1263 L315 1264 L322 1265 L322 1275 L320 1279 L322 1275 L321 1244 L324 1152 L321 1141 L321 887 L317 879 L318 847 L322 840 L320 835 L322 815","M347 918 L348 1009 L346 1073 L348 1080 L346 1082 L348 1089 L346 1094 L346 1208 L348 1219 L349 1279 L348 1219 L346 1208 L346 1124 L348 1123 L346 1117 L346 1094 L348 1084 L346 1082 L351 1080 L359 1083 L378 1084 L382 1082 L386 1084 L380 1081 L382 1077 L384 1081 L387 1080 L391 1082 L389 1083 L397 1085 L397 1083 L410 1082 L416 1079 L412 1080 L411 1075 L412 1080 L410 1082 L392 1084 L392 1080 L399 1081 L394 1079 L388 1081 L381 1077 L381 1082 L375 1084 L359 1083 L355 1079 L352 1081 L347 1078 L349 1076 L346 1073 L348 1009 L346 919","M325 169 L311 177 L310 190 L335 301 L310 190 L311 178 L317 173 L329 169 L334 191 L348 297 L335 303 L332 309 L329 305 L316 257 L305 199 L323 285 L330 308 L335 311 L333 316 L335 313 L333 306 L337 302 L348 298 L334 191 L330 179 L331 172 L330 169 L326 169","M389 684 L389 686 L362 688 L360 711 L360 785 L361 690 L368 687 L393 686 L397 684 L399 686 L401 862 L398 864 L376 864 L372 866 L374 868 L388 869 L398 867 L388 869 L375 868 L374 866 L377 864 L391 865 L397 863 L401 867 L399 864 L401 863 L399 685 L391 686 L390 684","M411 920 L403 921 L402 923 L408 929 L408 940 L405 942 L407 943 L410 956 L412 1022 L416 1062 L419 1077 L429 1090 L425 1096 L432 1106 L430 1114 L435 1114 L431 1114 L432 1108 L436 1111 L441 1131 L438 1138 L433 1141 L426 1141 L425 1143 L439 1138 L441 1130 L438 1125 L437 1112 L426 1099 L429 1090 L418 1074 L412 1022 L410 956 L407 947 L408 927 L402 923 L415 920 L412 920","M360 451 L364 465 L361 609 L366 611 L396 612 L407 617 L415 626 L421 643 L421 659 L418 666 L421 659 L421 643 L412 621 L408 617 L396 612 L366 611 L361 609 L364 464 L360 452","M400 389 L398 395 L407 403 L407 407 L402 412 L397 424 L397 435 L403 443 L397 449 L396 460 L398 608 L397 451 L402 446 L403 441 L397 435 L397 424 L402 413 L407 408 L407 402 L399 395 L399 390","M345 639 L344 641 L336 641 L338 645 L337 651 L337 648 L340 646 L341 651 L343 647 L345 652 L343 655 L337 654 L334 668 L337 655 L342 654 L344 657 L342 667 L343 656 L345 653 L347 654 L343 671 L338 670 L340 657 L337 673 L338 670 L341 672 L338 676 L336 675 L350 677 L352 674 L350 677 L346 674 L343 675 L347 657 L349 654 L348 668 L350 656 L352 654 L357 656 L354 669 L357 655 L361 656 L360 665 L361 655 L357 652 L357 648 L359 648 L357 643 L357 647 L351 647 L351 654 L346 654 L344 648 L347 647 L348 651 L349 647 L347 646 L349 640 L346 640","M391 934 L390 937 L394 941 L394 945 L391 947 L385 946 L382 942 L365 942 L383 943 L385 949 L374 952 L374 954 L379 950 L383 952 L379 957 L379 1043 L379 957 L382 954 L386 956 L386 967 L383 972 L384 975 L387 975 L383 972 L388 967 L385 965 L386 955 L383 951 L400 950 L390 951 L384 948 L385 946 L392 947 L395 945 L394 939 L390 937 L391 935","M342 821 L342 828 L336 842 L346 842 L343 840 L347 838 L350 843 L350 863 L353 870 L351 883 L347 888 L348 905 L347 888 L351 884 L351 876 L353 874 L368 878 L388 879 L400 877 L388 879 L368 878 L353 874 L352 871 L356 869 L363 872 L372 871 L364 872 L351 868 L350 841 L347 838 L349 835 L351 839 L352 837 L349 833 L345 839 L339 837 L342 828 L349 831 L342 828 L343 824 L347 827 L342 822","M362 164 L394 163 L411 165 L413 167 L411 172 L407 168 L412 173 L412 188 L401 292 L398 296 L358 296 L355 293 L339 168 L343 165 L361 164","M370 308 L360 309 L359 316 L366 329 L373 357 L375 356 L373 329 L367 322 L374 333 L375 354 L373 356 L369 338 L362 321 L364 317 L370 317 L373 312 L369 317 L362 318 L359 315 L359 311 L370 308 L395 309 L397 311 L396 324 L391 333 L385 357 L389 339 L395 328 L397 310 L385 308 L371 309","M309 615 L294 616 L282 624 L284 625 L282 628 L277 628 L281 629 L282 633 L274 633 L278 636 L274 637 L273 635 L273 637 L278 637 L278 634 L285 634 L287 637 L293 638 L333 637 L333 632 L332 636 L313 635 L313 637 L288 637 L287 635 L322 633 L286 635 L282 633 L283 624 L294 616 L327 616 L332 629 L327 616 L310 616","M318 278 L328 312 L328 319 L326 321 L328 335 L332 341 L346 349 L355 361 L354 374 L359 378 L361 385 L358 388 L359 395 L351 405 L351 409 L358 417 L360 425 L364 429 L362 432 L363 436 L365 428 L360 425 L358 416 L351 408 L359 396 L358 389 L361 387 L360 378 L354 373 L354 357 L347 349 L333 341 L328 334 L326 326 L328 312 L318 279","M363 163 L343 165 L339 168 L355 293 L357 296 L399 296 L409 225 L413 166 L394 163 L364 163","M273 649 L275 651 L273 656 L276 668 L286 681 L290 683 L304 681 L310 686 L318 686 L323 691 L325 699 L320 705 L318 718 L326 718 L328 721 L324 724 L333 722 L329 722 L329 719 L320 719 L318 717 L319 712 L324 714 L331 713 L324 713 L322 711 L326 707 L329 709 L325 707 L321 712 L319 711 L320 705 L325 699 L323 697 L323 690 L317 685 L314 687 L310 686 L304 681 L292 683 L287 681 L279 673 L274 661 L275 657 L273 655 L277 653 L274 652 L282 651 L274 650","M371 151 L336 155 L340 158 L343 157 L339 158 L338 154 L359 152 L360 156 L345 157 L368 155 L407 156 L361 155 L362 152 L371 151 L414 152 L418 155 L415 152 L372 151","M423 168 L422 173 L425 181 L421 184 L408 286 L408 297 L416 300 L421 299 L444 183 L444 177 L440 173 L424 168","M416 1160 L400 1163 L351 1161 L350 1190 L382 1194 L397 1193 L382 1194 L351 1190 L351 1162 L400 1163 L424 1160 L417 1160","M423 169 L428 168 L439 173 L444 178 L424 286 L421 298 L416 300 L408 296 L419 192 L421 185 L425 182 L422 170","M439 269 L428 310 L428 333 L423 340 L409 349 L404 355 L401 364 L403 372 L397 377 L396 382 L398 387 L400 387 L396 382 L397 378 L403 374 L401 364 L404 356 L427 336 L429 330 L428 310 L439 270","M544 993 L528 1003 L516 1006 L511 1011 L503 1014 L478 1009 L489 1012 L495 1011 L501 1014 L509 1012 L514 1015 L541 1019 L565 1019 L541 1019 L514 1015 L509 1012 L516 1006 L528 1003 L545 993","M398 1119 L387 1120 L409 1119 L412 1122 L407 1125 L391 1126 L388 1122 L388 1126 L351 1124 L351 1147 L357 1149 L351 1146 L350 1130 L360 1130 L351 1129 L351 1124 L398 1126 L412 1123 L410 1119 L399 1119","M337 319 L334 336 L358 354 L361 365 L358 353 L334 335 L335 323 L338 319 L351 321 L358 329 L366 354 L363 367 L366 354 L358 328 L352 321 L338 319","M331 724 L330 733 L325 730 L324 726 L325 731 L330 735 L325 800 L322 799 L322 791 L322 800 L326 802 L327 811 L325 812 L323 804 L323 811 L325 812 L328 806 L325 803 L325 781 L327 779 L331 725","M450 187 L442 238 L427 303 L438 258 L450 188","M313 1188 L308 1193 L211 1237 L309 1193 L312 1189","M356 898 L348 910 L348 915 L360 916 L365 919 L384 920 L399 919 L416 914 L411 905 L408 905 L409 912 L408 906 L416 913 L399 919 L383 920 L367 919 L357 915 L351 916 L347 913 L357 898","M525 1230 L519 1236 L492 1250 L426 1235 L492 1250 L510 1242 L526 1230","M361 684 L354 689 L354 692 L347 688 L333 690 L331 709 L335 718 L343 724 L349 725 L353 723 L357 716 L349 725 L336 719 L336 714 L334 714 L332 709 L333 691 L335 689 L347 688 L354 692 L361 684 L379 684 L362 684","M544 985 L526 992 L497 994 L491 998 L497 994 L526 992 L544 985 L555 987 L558 991 L558 996 L540 1001 L537 1004 L540 1001 L553 997 L565 998 L558 996 L556 987 L545 985","M387 884 L384 889 L385 898 L382 900 L374 899 L374 906 L389 907 L402 905 L390 898 L387 898 L392 900 L394 904 L399 903 L400 905 L388 907 L381 904 L380 907 L378 903 L377 906 L373 904 L375 899 L379 901 L380 899 L381 902 L385 899 L386 888 L391 891 L392 895 L386 885 L393 885 L393 887 L392 884 L388 884","M354 943 L352 945 L354 943 L357 946 L355 948 L352 947 L356 950 L356 961 L353 980 L351 1032 L353 980 L356 961 L355 949 L357 947 L355 943","M447 734 L443 735 L439 741 L439 747 L443 756 L442 765 L447 770 L455 770 L459 767 L461 761 L455 750 L457 746 L456 741 L457 746 L455 750 L461 761 L459 766 L454 770 L448 770 L442 764 L443 753 L439 747 L440 739 L447 734 L452 735 L456 739 L451 734 L448 734","M289 653 L332 654 L331 658 L289 657 L330 659 L335 654 L290 654","M445 1131 L451 1137 L454 1156 L458 1161 L458 1170 L460 1172 L464 1167 L467 1170 L466 1175 L456 1184 L451 1185 L449 1189 L466 1176 L467 1170 L464 1163 L466 1166 L459 1171 L458 1160 L453 1151 L452 1139 L450 1134 L446 1132","M532 963 L504 967 L480 967 L504 967 L533 963 L541 968 L565 970 L541 968 L533 963","M442 219 L424 300 L442 220","M355 762 L355 775 L353 775 L354 800 L351 803 L349 813 L351 828 L349 823 L350 806 L358 798 L358 790 L358 798 L356 800 L353 797 L354 777 L356 774 L355 763","M337 846 L337 884 L342 885 L344 883 L342 858 L344 848 L342 855 L343 883 L339 885 L337 883 L338 847","M486 973 L502 976 L527 975 L565 979 L527 975 L502 976 L487 973","M407 311 L406 319 L408 312 L413 313 L416 318 L406 321 L396 338 L392 351 L394 365 L397 364 L397 357 L402 350 L415 341 L422 333 L422 327 L416 315 L408 312","M313 221 L330 299 L313 222","M564 1146 L496 1181 L565 1146","M564 1151 L496 1185 L565 1151","M554 689 L562 695 L565 707 L564 714 L555 720 L547 714 L545 708 L547 705 L546 696 L552 691 L546 695 L546 712 L550 718 L555 720 L564 715 L564 699 L562 694 L555 690","M360 801 L361 868 L362 864 L371 864 L363 864 L360 861 L360 802","M355 878 L360 891 L360 902 L357 906 L359 910 L367 916 L384 915 L387 917 L396 915 L374 916 L367 915 L357 907 L360 902 L360 891 L355 879","M466 1249 L465 1252 L467 1249 L471 1249 L477 1252 L484 1252 L485 1255 L452 1277 L452 1279 L490 1253 L486 1255 L485 1252 L467 1249","M303 1199 L240 1228 L304 1199","M306 609 L286 615 L306 609 L358 610 L307 609","M333 639 L273 641 L275 644 L273 647 L276 646 L274 643 L276 640 L333 640 L334 644 L334 640","M408 637 L409 655 L402 674 L396 672 L371 672 L396 672 L402 674 L407 665 L409 655 L408 638","M492 1182 L471 1194 L467 1190 L469 1193 L466 1196 L463 1195 L471 1194 L492 1182 L494 1184 L489 1189 L470 1198 L493 1187 L493 1183","M322 156 L304 165 L299 171 L299 176 L302 178 L299 172 L309 162 L323 156 L327 158 L312 165 L306 172 L313 165 L327 160 L327 157 L323 156","M565 1026 L556 1028 L512 1048 L502 1049 L512 1048 L557 1028 L564 1027","M344 177 L363 185 L375 184 L377 182 L382 184 L400 184 L408 179 L400 184 L376 182 L363 185 L345 177","M420 1101 L408 1106 L389 1109 L369 1109 L353 1106 L369 1109 L389 1109 L419 1102","M290 663 L289 666 L291 667 L291 663 L328 666 L327 668 L306 667 L328 668 L329 665 L291 663","M428 153 L428 155 L439 158 L459 169 L461 173 L454 175 L455 178 L453 179 L455 182 L451 182 L455 183 L454 176 L461 173 L459 168 L453 167 L446 161 L428 154","M439 1146 L422 1153 L386 1156 L422 1153 L439 1146 L442 1148 L446 1147 L440 1147","M507 1246 L459 1277 L459 1279 L508 1246","M387 1054 L385 1056 L387 1062 L385 1065 L388 1062 L392 1066 L390 1068 L383 1068 L382 1071 L385 1073 L390 1072 L393 1076 L392 1078 L394 1077 L391 1072 L384 1072 L382 1070 L392 1067 L397 1074 L391 1064 L386 1061 L385 1056 L388 1055","M280 647 L278 648 L333 647 L334 652 L334 647 L281 647","M415 319 L418 320 L422 332 L414 341 L402 349 L397 356 L397 363 L395 365 L392 357 L395 341 L407 321 L414 320","M412 1096 L400 1100 L353 1098 L400 1100 L413 1096","M380 625 L373 626 L400 626 L406 638 L406 647 L402 648 L399 646 L402 648 L407 647 L406 638 L400 626 L381 625","M398 952 L391 960 L391 994 L393 996 L393 1003 L391 991 L392 958 L399 953","M362 67 L358 70 L359 74 L358 71 L361 69 L367 76 L347 104 L367 77 L367 74 L361 68","M413 640 L411 660 L414 644 L417 648 L417 657 L409 675 L415 663 L418 649 L413 641","M564 1066 L513 1081 L565 1066","M331 616 L337 620 L339 632 L340 624 L344 637 L344 631 L347 636 L346 627 L344 631 L340 622 L339 625 L337 623 L340 620 L332 617","M550 791 L544 801 L546 806 L551 809 L546 806 L545 797 L549 792 L557 792 L561 800 L556 810 L560 804 L560 795 L556 791 L551 791","M346 747 L346 772 L349 776 L347 797 L349 774 L346 772 L346 748","M290 623 L288 631 L329 630 L289 631 L290 624","M352 614 L349 616 L352 615 L355 618 L361 636 L359 640 L353 640 L361 641 L362 651 L360 631 L353 615","M302 1161 L299 1169 L300 1176 L311 1185 L317 1187 L320 1185 L319 1179 L316 1179 L320 1181 L320 1184 L316 1187 L299 1174 L300 1165 L303 1161","M326 744 L321 782 L322 789 L323 762 L327 744","M340 694 L337 699 L349 700 L356 707 L357 711 L351 701 L339 698 L341 694 L351 696 L352 699 L353 697 L341 694","M336 729 L335 739 L332 743 L335 749 L334 773 L335 749 L333 744 L336 730","M311 643 L284 644 L330 644 L312 643","M425 1145 L408 1151 L387 1152 L408 1151 L426 1145","M321 650 L289 651 L331 651 L322 650","M293 661 L331 661 L332 666 L333 663 L332 661 L294 661","M543 1213 L522 1225 L543 1213 L549 1219 L554 1215 L556 1216 L548 1218 L544 1214","M556 748 L552 752 L550 760 L559 766 L565 763 L558 766 L550 759 L551 754 L556 748 L561 748 L565 751 L564 749 L557 748","M417 1127 L379 1131 L418 1127","M347 619 L346 624 L349 628 L346 622 L347 619 L352 625 L350 630 L354 626 L357 638 L353 621 L348 620","M331 669 L329 672 L305 672 L328 671 L332 676 L334 670 L331 676 L329 673 L331 670","M380 318 L382 357 L380 347 L381 319","M373 400 L371 402 L363 401 L399 402 L377 402 L374 400","M313 1140 L311 1159 L305 1168 L311 1172 L306 1167 L311 1160 L313 1141","M421 1083 L406 1088 L388 1088 L386 1090 L421 1084","M371 617 L377 619 L398 618 L406 622 L398 618 L377 619 L372 617","M343 743 L339 745 L339 774 L339 746 L341 744 L347 745 L344 743","M364 619 L369 637 L369 647 L364 650 L369 648 L369 637 L365 620","M338 703 L343 711 L338 713 L351 712 L346 707 L346 703 L346 708 L349 711 L345 713 L339 703","M370 678 L366 681 L370 678 L398 680 L371 678","M404 869 L395 873 L388 872 L392 874 L407 870 L407 874 L401 875 L408 874 L408 870 L405 870","M332 774 L336 778 L336 787 L334 789 L329 788 L335 788 L339 797 L336 790 L336 778 L333 775","M366 909 L381 912 L396 910 L367 910","M377 645 L376 652 L379 645 L394 650 L398 648 L394 650 L381 645 L378 646"]}};
+/* ================= SCENE 1 ================= */
+const LAMP={w:[.757,.125],t:[.52,.176]},IMG={w:[1280,720],t:[720,1280]};
+function mkSk(id,k){const P=PATHS['stage-'+k];$(id).setAttribute('viewBox',`0 0 ${P.w} ${P.h}`);$(id).setAttribute('preserveAspectRatio','xMidYMid slice');$(id).innerHTML=P.d.map(d=>`<path d="${d}" pathLength="1"/>`).join('')}
+mkSk('#hskw','wide');mkSk('#hskt','tall');
+function hsw(){$$('.hsk').forEach(s=>{const P=PATHS[s.classList.contains('t')?'stage-tall':'stage-wide'],sc=Math.max(innerWidth/P.w,innerHeight/P.h);s.style.setProperty('--sw',(1.5/sc).toFixed(2))})}
+hsw();
+const hskW=$$('#hskw path'),hskT=$$('#hskt path'),hchips=$$('#hchips span');
+const FLK=[0,1,0,1,1,0,1,1,1,0,1,1];
+function hero(p){const k=portrait()?'t':'w',paths=k=='t'?hskT:hskW;
+ if(k=='t'){$('#hskt').style.display='block';$('#hskw').style.display='none'}else{$('#hskw').style.display='block';$('#hskt').style.display='none'}
+ const W=innerWidth,H=innerHeight,[iw,ih]=IMG[k],sc=Math.max(W/iw,H/ih),lx=(W-iw*sc)/2+LAMP[k][0]*iw*sc,ly=(H-ih*sc)/2+LAMP[k][1]*ih*sc;
+ const draw=seg(p,0,.26),n=paths.length;paths.forEach((pa,i)=>pa.style.strokeDashoffset=(1-cl(draw*1.8-(i/n)*.8)).toFixed(3));
+ const sk=ease(seg(p,.1,.28))*(1-ease(seg(p,.52,.82))*.9);$$('#hero .skimg').forEach(e=>e.style.opacity=sk*.9);
+ $$('.hsk').forEach(e=>e.style.opacity=1-ease(seg(p,.55,.85))*.9);
+ const fl=seg(p,.28,.44),inten=fl<=0?0:fl<1?FLK[Math.floor(fl*FLK.length)]*.55+fl*.45:1;
+ const gl=$('#hglow');gl.style.opacity=Math.max(inten,ease(seg(p,.44,.6)));
+ gl.style.background=`radial-gradient(circle at ${lx}px ${ly}px,rgba(255,196,110,${.55*inten}) 0,rgba(255,160,70,${.2*inten}) ${Math.min(W,H)*.16}px,transparent ${Math.min(W,H)*.5}px)`;
+ const R=ease(seg(p,.42,.78))*Math.hypot(W,H);$('#hph').style.clipPath=`circle(${R}px at ${lx}px ${ly}px)`;
+ $('#hvig').style.opacity=ease(seg(p,.55,.8));
+ const f=ease(seg(p,.5,.8))*100;$('#hh').style.setProperty('--fill',f+'%');$('#hh em').style.setProperty('--fill',f+'%');
+ $('#hsub').style.opacity=seg(p,.78,.9);
+ const ci=p<.3?0:p<.62?1:2;hchips.forEach((c,i)=>c.classList.toggle('on',i==ci));
+ $('#hlayer').style.transform=`scale(${1+ease(seg(p,.6,1))*.07})`;$('#hlayer').style.transformOrigin=`${lx}px ${ly}px`}
+/* ================= SCENE 2 ================= */
+const AR=[['chairman','회장님','프로듀서 · PRODUCER','',null,'',45],['vsiign','L.Gordon','프로듀서 · PRODUCER','@lee_chang_woong','https://www.instagram.com/lee_chang_woong/','',50],['hpa','hPa','프로듀서 · PRODUCER','',null,'',52],['junhyuk','임준혁','가수 · SINGER','@____junhyeok','https://www.instagram.com/____junhyeok/','맑고 단단한 목소리, 네버랜드에서 날아온 싱어송라이터',55],['gwangseok','이광석','가수 · SINGER','@dlrhkdtjr','https://www.instagram.com/dlrhkdtjr/','가로등 하나씩 켜지는 집으로 가는 길, 그 위에 내려앉는 목소리',42]];
+const LAMPSVG=`<svg viewBox="0 0 160 520"><path class="lf" d="M56 100 L50 40 L110 40 L104 100 Z" fill="url(#glass)"/><path class="lf pl" d="M74 470 L76 130 L84 130 L86 470 Z" fill="url(#metal)"/><ellipse class="lf" cx="80" cy="72" rx="9" ry="15" fill="#fff9e0"/>
+<path class="st" d="M40 520 L120 520 L112 490 L48 490 Z"/><path class="st" d="M52 490 L108 490 L104 468 L56 468 Z"/><path class="st" d="M74 468 L76 130"/><path class="st" d="M86 468 L84 130"/><path class="st" d="M67 400 L93 400"/><path class="st" d="M69 300 L91 300"/><path class="st" d="M80 130 C60 122 54 112 60 100"/><path class="st" d="M80 130 C100 122 106 112 100 100"/>
+<path class="st" d="M52 100 L108 100"/><path class="st" d="M56 100 L50 40"/><path class="st" d="M104 100 L110 40"/><path class="st" d="M80 100 L80 40"/><path class="st" d="M50 40 L110 40"/><path class="st" d="M44 40 L80 14 L116 40"/><path class="st" d="M80 14 L80 2"/><path class="st" d="M70 40 L68 100"/><path class="st" d="M90 40 L92 100"/><ellipse class="st" cx="80" cy="72" rx="9" ry="15"/></svg>`;
+const track=$('#track');
+track.innerHTML=AR.map((a,i)=>`<div class="seg" id="sg${i}"><div class="pool"></div><div class="cone"></div><div class="bulb"></div><div class="lamp">${LAMPSVG}</div>
+<div class="arch" style="--op:${a[6]}%"><img class="sk" src="assets/sk-${a[0]}.webp" alt=""><img class="ph" src="assets/${a[0]}.webp" alt="${a[1]}"><i class="wl"></i></div>
+<div class="info"><p class="no mono">0${i+1} / 05</p><h3>${a[1]}</h3><p class="rl mono">${a[2]}</p>${a[3]?`<a class="hd" href="${a[4]}" target="_blank" rel="noopener">${a[3]}</a>`:''}${a[5]?`<q>${a[5]}</q>`:''}</div></div>`).join('');
+$('#rdots').innerHTML=AR.map((a,i)=>`<span><i></i>${a[1]}</span>`).join('');
+const SEGS=$$('.seg'),RD=$$('#rdots span');
+/* stars + skyline */
+const stc=$('#stars');let stW=0;
+function drawStars(){const W=innerWidth,H=innerHeight*.6,d=Math.min(2,devicePixelRatio||1);stW=W*1.6;stc.style.width=stW+'px';stc.style.height=H+'px';stc.width=stW*d;stc.height=H*d;const c=stc.getContext('2d');c.setTransform(d,0,0,d,0,0);
+ let s=5;const r=()=>(s=(s*16807)%2147483647)/2147483647;for(let i=0;i<220;i++){c.fillStyle=`rgba(241,233,216,${.15+r()*.55})`;const z=r()<.1?1.8:1;c.fillRect(r()*stW,r()*H,z,z)}}
+function drawSky(){const W=innerWidth*2.2,H=Math.round(innerHeight*(mobile()?.26:.34)),sv=$('#sky');sv.setAttribute('viewBox',`0 0 ${W} ${H}`);sv.style.width=W+'px';let s=9;const r=()=>(s=(s*16807)%2147483647)/2147483647;let x=0,h='';
+ while(x<W){const bw=40+r()*90,bh=H*(.25+r()*.7);h+=`<rect x="${x}" y="${H-bh}" width="${bw}" height="${bh}" fill="#0f0d1e"/>`;for(let k=0;k<Math.floor(bw*bh/2600);k++)if(r()<.35)h+=`<rect x="${x+6+r()*(bw-14)}" y="${H-bh+8+r()*(bh-16)}" width="3" height="4" fill="rgba(255,196,120,${.25+r()*.5})"/>`;x+=bw+4+r()*14}
+ sv.innerHTML=h}
+function layoutRoad(){const W=innerWidth,m=mobile(),sp=(m?.78:.48)*W,x0=m?.5*W:.4*W;SEGS.forEach((s,i)=>s.style.left=(x0+i*sp)+'px');return sp}
+drawStars();drawSky();let SP=layoutRoad();
+addEventListener('resize',()=>{drawStars();drawSky();SP=layoutRoad();hsw();buildAud()});
+const RS=AR.map((_,i)=>{const s=SEGS[i];return{st:[...s.querySelectorAll('.lamp .st')],lf:[...s.querySelectorAll('.lamp .lf')],bulb:s.querySelector('.bulb'),cone:s.querySelector('.cone'),pool:s.querySelector('.pool'),sk:s.querySelector('.arch .sk'),ph:s.querySelector('.arch .ph'),wl:s.querySelector('.arch .wl'),arch:s.querySelector('.arch'),info:s.querySelector('.info')}});
+function road(p){let pos=0;for(let i=1;i<5;i++)pos+=ease(seg(p,i*.2,i*.2+.07));
+ track.style.transform=`translateX(${-pos*SP}px)`;$('#stars').style.transform=`translateX(${-pos*SP*.08}px)`;$('#sky').style.transform=`translateX(${-pos*SP*.25}px)`;$('#dash').style.backgroundPositionX=(-pos*SP)+'px';
+ let act=0;
+ RS.forEach((r,i)=>{const b=i*.2,draw=seg(p,i?b-.08:0,i?b+.03:.04),lt=ease(seg(p,b+(i?.05:.03),b+(i?.1:.08))),wp=ease(seg(p,b+(i?.09:.07),b+(i?.16:.15))),inf=ease(seg(p,b+(i?.12:.1),b+(i?.17:.16)));
+  const n=r.st.length;r.st.forEach((s,k)=>s.style.strokeDashoffset=(1-cl(draw*1.7-(k/n)*.7)).toFixed(3));
+  const fl=lt<1&&lt>0?(FLK[Math.floor(lt*FLK.length)]*.6+lt*.4):lt;
+  r.lf.forEach((e,k)=>e.style.opacity=k==1?cl(draw*1.4-.4):fl);r.bulb.style.opacity=fl;r.cone.style.opacity=fl;r.pool.style.opacity=fl;
+  r.sk.style.opacity=ease(seg(p,i?b-.02:0,i?b+.07:.08))*(1-wp*.9);r.ph.style.clipPath=`inset(${(1-wp)*100}% 0 0 0)`;r.wl.style.top=(1-wp)*100+'%';r.wl.style.opacity=wp>.01&&wp<.99?1:0;
+  r.arch.style.boxShadow=`0 0 0 1px rgba(241,233,216,${.12+.25*draw}),0 0 ${60*lt}px rgba(255,184,92,${.28*lt})`;
+  const out=i<4?ease(seg(p,(i+1)*.2,(i+1)*.2+.05)):0;r.info.style.opacity=inf*(1-out);r.info.style.transform=mobile()?`translateX(-50%) translateY(${(1-inf)*18}px)`:`translateY(${(1-inf)*18}px)`;
+  if(lt>.5)act=i});
+ RD.forEach((d,i)=>d.classList.toggle('on',i<=act&&p>.02));}
+/* ================= SCENE 3 ================= */
+const ALB=[['2012','Running','SINGLE · 싱글','L.Gordon','Route 81 명의','2012.03.21','running'],['2015','Cowboy','SINGLE · 싱글','L.Gordon','Route 81 명의 · feat. JK 김동욱','2015','cowboy'],['2017','Naive','SINGLE · 싱글','L.Gordon',"D'apes 명의",'2017.11.06','naive'],['2019','ESCORT','SINGLE · 싱글','L.Gordon','VSiiGN 명의 · with JK 김동욱','2019.02.10','escort'],['2020','하이라이트 필름','EP · 미니 EP','L.Gordon','VSiiGN 명의 · with 이앤','2020.09.04','highlightfilm'],['2021','아킬레스','EP · 미니 EP','L.Gordon','VSiiGN 명의 · with 임준혁','2021.01.30','achilles'],['2021','머메이드','EP · 미니 EP','L.Gordon','VSiiGN 명의 · with 신유미','2021.04.19','mermaid'],['2022','TINK','SINGLE · 싱글','임준혁','','2022.06.02','tink'],['2022','Daisy','SINGLE · 싱글','임준혁','','2022.07.20','daisy'],['2022','Back in Time','EP · 미니 EP','임준혁','','2022.11.26','backintime'],['2023','Latata','SINGLE · 싱글','임준혁','','2023.04.28','latata'],['2023','Blip','SINGLE · 싱글','임준혁','','2023.06.10','blip'],['2024','Home','SINGLE · 데뷔 싱글','이광석','수록곡 · 겨울이 피다','2024.12.21','home'],['2026','단잠','SINGLE · 싱글','이광석','','2026.07.20','danjam']];
+const NA=ALB.length;
+$('#ticks').innerHTML=ALB.map(a=>`<span><i></i>${a[0].slice(2)}</span>`).join('')+`<span class="nw"><i></i>NEW</span>`;
+const TK=$$('#ticks span');ALB.forEach(a=>{const i=new Image();i.src='assets/cov/'+a[6]+'.jpg'});
+let mi=-1,flipping=false,pend=null;
+function setAlbum(i){const slv=$('#slv'),lab=$('#vlab');
+ const apply=()=>{if(i>=NA){slv.classList.add('isnew');lab.className='q';lab.style.backgroundImage='none';lab.textContent='?';$('#yr span').textContent='NEW';$('#mt').textContent='NEW ALBUM';$('#mtype').textContent='NEWS · NEW RELEASE';$('#ma').textContent='임준혁 ✦ 이광석';$('#mc').textContent='두 아티스트의 새 앨범이 곧 공개됩니다. COMING SOON.';$('#mnew').style.display='flex'}
+  else{const a=ALB[i];slv.classList.remove('isnew');$('#slimg').src='assets/cov/'+a[6]+'.jpg';lab.className='';lab.textContent='';lab.style.backgroundImage=`url(assets/cov/${a[6]}.jpg)`;$('#yr span').textContent=a[0];$('#mt').textContent=a[1];$('#mtype').textContent=a[2];$('#ma').textContent=a[3]+' · '+a[5];$('#mc').textContent=a[4];$('#mnew').style.display='none'}
+  TK.forEach((t,k)=>t.classList.toggle('on',k==i))};
+ if(mi<0||RM){mi=i;apply();return}
+ const dir=i>mi?1:-1;mi=i;
+ gsap.killTweensOf('#slv,#yr span');
+ gsap.timeline().to('#slv',{rotateY:-90*dir,duration:.22,ease:'power2.in'}).call(apply).set('#slv',{rotateY:90*dir}).to('#slv',{rotateY:0,duration:.4,ease:'power3.out'})
+  .fromTo('#yr span',{yPercent:dir*100},{yPercent:0,duration:.5,ease:'expo.out'},.1).fromTo('#mt,#mtype,#ma,#mc',{y:16,opacity:0},{y:0,opacity:1,duration:.5,stagger:.04,ease:'power3.out'},.2)}
+let vrot=0,vlast=performance.now(),mP=0,mVis=false,vOut=0;
+(function loop(t){requestAnimationFrame(loop);const dt=Math.min(.05,(t-vlast)/1000);vlast=t;if(!mVis)return;vrot+=dt*(RM?0:(60+vOut*80));$('#vinyl').style.transform=`translateX(${vOut*$('#deck').offsetWidth*.58}px)`;$('#vlab').style.transform=`rotate(${vrot+mP*900}deg)`;})(0);
+function music(p){mP=p;vOut=ease(seg(p,0,.1)); const idx=p>=.9?NA:p<.1?0:Math.min(NA-1,Math.floor(seg(p,.1,.9)*NA));if(idx!=mi)setAlbum(idx);
+ $('#slv').style.transform=`rotateY(${-6*vOut}deg)`.replace(/^/,'')+(flipping?'':'')}
+/* ================= SCENE 4 ================= */
+const ROLES=[['작사','LYRICS','당신의 문장이 누군가의 노래가 되도록.'],['작곡','COMPOSE','흥얼거림 하나가 오래 남는 노래가 되도록.'],['보컬','VOCAL','당신의 목소리가 누군가의 하루에 닿도록.'],['싱어송라이터','SINGER-SONGWRITER','직접 쓰고 부른 노래로 옆에 있는 아티스트가 되도록.']];
+const astage=$('#astage');let AU={};
+function human(cx,{s=1,fillCls='sil',extra=''}={}){return `<g class="fig" transform="translate(${cx} 0)"><path class="${fillCls}" d="M-46 470 L-44 330 C-44 296 -24 280 0 280 C24 280 44 296 44 330 L46 470 Z"/><circle class="${fillCls}" cx="0" cy="246" r="28"/>${extra}</g>`}
+const PROP={
+ keys:`<g class="prop"><path class="sil" d="M-96 372 L96 372 L96 392 L-96 392 Z"/><path d="M-90 372 L-90 392 M-70 372 L-70 392 M-50 372 L-50 392 M-30 372 L-30 392 M-10 372 L-10 392 M10 372 L10 392 M30 372 L30 392 M50 372 L50 392 M70 372 L70 392 M90 372 L90 392" stroke="rgba(241,233,216,.22)"/><path class="sil" d="M-60 392 L-70 470 M60 392 L70 470"/></g>`,
+ guitar:`<g class="prop"><ellipse class="sil" cx="-6" cy="400" rx="50" ry="38" transform="rotate(-24 -6 400)"/><path class="sil" d="M24 380 L96 310 L104 318 L34 392"/></g>`,
+ mic:`<g class="prop"><path d="M72 470 L72 300" stroke="rgba(241,233,216,.5)" stroke-width="3"/><path d="M40 470 L104 470" stroke="rgba(241,233,216,.5)" stroke-width="3"/><circle class="sil" cx="72" cy="292" r="12"/></g>`,
+ book:`<g class="prop"><path class="sil" d="M-26 350 L30 340 L36 392 L-20 402 Z"/><path d="M4 345 L8 397" stroke="rgba(241,233,216,.3)"/><path d="M40 330 L62 392" stroke="#ffb85c" stroke-width="3" stroke-linecap="round"/></g>`
+};
+function buildAud(){const vbx=mobile()?'330 0 540 560':'0 0 1200 560';
+ const side=[[170,'keys'],[400,'guitar'],[800,'mic'],[1030,'guitar']];
+ const roleProps=['book','keys','mic','guitar'];
+ let h=`<svg viewBox="${vbx}" preserveAspectRatio="xMidYMid meet"><defs><linearGradient id="spg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(255,196,110,.5)"/><stop offset="1" stop-color="rgba(255,196,110,.02)"/></linearGradient><linearGradient id="spv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(140,100,255,.38)"/><stop offset="1" stop-color="rgba(108,59,255,.0)"/></linearGradient></defs>
+ <path id="floor" d="M40 470 L1160 470 L1210 540 L-10 540 Z" fill="#12101f" stroke="rgba(241,233,216,.2)"/>
+ <g id="spots">${side.map(s=>`<path class="spv" d="M${s[0]-14} 0 L${s[0]+14} 0 L${s[0]+110} 470 L${s[0]-110} 470 Z" fill="url(#spv)" opacity="0"/>`).join('')}<path id="spmain" d="M586 0 L614 0 L740 470 L460 470 Z" fill="url(#spg)" opacity="0"/></g>
+ <g id="sidefigs">${side.map(s=>`<g class="sf" style="opacity:0">${human(s[0],{extra:PROP[s[1]]})}</g>`).join('')}</g>
+ <g id="roles">${roleProps.map((r,i)=>`<g class="role" style="opacity:0">${human(600,{fillCls:'sil rl',extra:PROP[r]})}</g>`).join('')}</g>
+ <g id="ghost" fill="none" stroke="rgba(241,233,216,.7)" stroke-width="2" stroke-dasharray="7 7"><path d="M554 470 L556 330 C556 296 576 280 600 280 C624 280 644 296 644 330 L646 470 Z"/><circle cx="600" cy="246" r="28"/></g>
+ <text id="ghq" x="600" y="402" text-anchor="middle" font-family="Unbounded" font-weight="800" font-size="46" fill="rgba(255,216,154,.9)">?</text>
+ </svg>`;astage.innerHTML=h;
+ AU={spv:[...astage.querySelectorAll('.spv')],spm:$('#spmain'),sf:[...astage.querySelectorAll('.sf')],roles:[...astage.querySelectorAll('.role')],ghost:$('#ghost'),ghq:$('#ghq')}}
+buildAud();
+const rch=$$('#rchips span');let lastR=-2;
+function aud(p){const a=ease(seg(p,0,.1)),sp=ease(seg(p,.06,.16));
+ AU.spv.forEach((e,i)=>e.setAttribute('opacity',(.9*ease(seg(p,.02+i*.02,.1+i*.02))).toFixed(2)));
+ AU.sf.forEach((e,i)=>{const o=ease(seg(p,.01+i*.025,.09+i*.025));e.style.opacity=o;e.style.transform=`translateY(${(1-o)*30}px)`});
+ AU.spm.setAttribute('opacity',sp.toFixed(2));
+ const q=seg(p,.16,.74),n=q*4,i=Math.min(3,Math.floor(n)),f=n-i,fin=p>=.8;
+ AU.roles.forEach((e,k)=>{let o=0;if(k<i)o=0;else if(k==i)o=ease(seg(f,0,.35));e.style.opacity=fin?(k==3?1:0):(q<=0?0:o);
+  e.querySelectorAll('.rl').forEach(x=>{x.style.fill=`rgba(${Math.round(lerp(6,255,0))},${Math.round(lerp(5,184,0))},${Math.round(lerp(12,92,0))},0)`})});
+ /* roles also stay lit behind each other: show previous at low opacity = swap not stack */
+ AU.ghost.style.opacity=(q<=0?1:Math.max(0,1-ease(seg(f,0,.2))*(p<.8?1:1)))*(p<.8?1:ease(seg(p,.8,.9)));
+ AU.ghq.style.opacity=q<=0?1:0;
+ const ri=q<=0?-1:fin?3:i;
+ const ri2=fin?4:ri;if(ri2!=lastR){lastR=ri2;rch.forEach((c,k)=>{c.classList.toggle('on',k==ri&&!fin);c.classList.toggle('dn',k<ri||fin)});const r=ROLES[Math.max(0,Math.min(3,ri))];
+  if(!RM)gsap.fromTo('#abig span',{yPercent:100},{yPercent:0,duration:.6,ease:'expo.out'});$('#abig span').textContent=ri<0?'?':fin?'다음은 당신.':r[0];$('#aln').textContent=ri<0?'빈자리 하나, 누가 채울까?':fin?'경력 무관 · 장르 무관 — 옆에 있는 아티스트가 될 당신을 언제나 기다려요.':r[2];}
+ const nx=ease(seg(p,.84,.94));const ac=$('#acta');ac.style.opacity=nx;ac.style.pointerEvents=nx>.5?'auto':'none';$('#rchips').style.opacity=1-nx;
+ $('#arole').style.opacity=1-ease(seg(p,.88,.95))*.0;
+ /* glow figure when final */
+ AU.roles[3].style.filter=fin?`drop-shadow(0 0 ${22*nx}px rgba(255,184,92,.8))`:'none'}
+/* ================= pins ================= */
+const ST={};
+function pin(id,len,fn,extra){ST[id]=ScrollTrigger.create({trigger:'#'+id,start:'top top',end:'+='+len,pin:true,scrub:true,anticipatePin:1,onUpdate:s=>fn(s.progress),...extra});fn(0)}
+pin('hero',innerHeight*(mobile()?3.2:4),hero);
+pin('road',innerHeight*(mobile()?6:7.5),road);
+pin('music',innerHeight*(mobile()?6:7),music,{onToggle:s=>mVis=s.isActive,onEnter:()=>mVis=true,onEnterBack:()=>mVis=true});
+pin('aud',innerHeight*(mobile()?5:6),aud);
+window.__st=ST;setAlbum(0);
+addEventListener('load',()=>ScrollTrigger.refresh());document.fonts&&document.fonts.ready.then(()=>ScrollTrigger.refresh());
+$$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=a.getAttribute('href');if(t.length<2)return;e.preventDefault();const el=document.querySelector(t),pinned=ST[t.slice(1)];const y=pinned?pinned.start:el.getBoundingClientRect().top+scrollY;lenis?lenis.scrollTo(y,{duration:1.6}):window.scrollTo({top:y,behavior:RM?'auto':'smooth'})}));
+function later(){
+ if(!RM){const tl=gsap.timeline({scrollTrigger:{trigger:'#cta',start:'top 62%',toggleActions:'play none none reverse'}});
+  tl.from('#cta .split .c',{yPercent:110,rotate:6,opacity:0,duration:.9,ease:'expo.out',stagger:.025}).from('#cta .eb,#cta .K,#cta .btns,#cta .card',{y:24,opacity:0,duration:.8,ease:'power3.out',stagger:.08},'<.2')}
+ let lastY=0;ScrollTrigger.create({start:0,end:'max',onUpdate:s=>{gsap.set('#prog',{scaleX:s.progress});const y=scrollY;$('#nav').classList.toggle('solid',y>60);$('#nav').classList.toggle('hide',y>lastY+2&&y>innerHeight);if(y<lastY-2)$('#nav').classList.remove('hide');lastY=y;
+  let sc=0;if(y>=ST.aud.start-10)sc=3;else if(y>=ST.music.start-10)sc=2;else if(y>=ST.road.start-10)sc=1;
+  $('#scn').style.opacity=y>ST.aud.end-20?0:.75;$('#scnn').textContent=`SCENE 0${sc+1} / 04`;$('#scnl').style.transform=`scaleX(${s.progress})`;const t=Math.round(s.progress*120);$('#scntc').textContent=`00:${String(Math.floor(t/60)).padStart(2,'0')}:${String(t%60).padStart(2,'0')}`}})}
+later();ScrollTrigger.refresh();intro();
+</script></body></html>
